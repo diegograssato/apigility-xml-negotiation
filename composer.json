@@ -1,0 +1,40 @@
+{
+    "name": "diegograssato/apigility-xml-negotiation",
+    "type": "library",
+    "description": "Apigility Module providing XML content-negotiation features",
+    "keywords" : [
+		"api",
+		"apigility",
+		"module",
+		"zf3",
+		"xml",
+        "zend",
+		"negotiation",
+        "content-negotiation"
+	],
+    "homepage": "https://github.com/diegograssato/apigility-xm-lnegotiation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Diego Pereira Grassato",
+            "email": "diego.grassato@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "zfcampus/zf-apigility": "^1.3",
+        "zfcampus/zf-content-negotiation": "^1.2",
+        "zendframework/zend-stdlib": "^2.7.7 || ^3.0.1",
+        "zendframework/zend-serializer": "^2.7.7 || ^3.0.1",
+        "zendframework/zend-component-installer": "^1.0 || ^0.5 || ^1.0.0-dev@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZF\\ContentNegotiation\\XML\\": "src/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}
