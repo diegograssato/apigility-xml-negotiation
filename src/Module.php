@@ -62,11 +62,11 @@ class Module
      *
      * Attaches a render event.
      *
-     * @param \Zend\Mvc\MvcEvent $e
+     * @param \Zend\Mvc\MvcEvent $event
      */
-    public function onBootstrap($e)
+    public function onBootstrap(MvcEvent $event)
     {
-        $app = $e->getTarget();
+        $app = $event->getTarget();
         $events = $app->getEventManager();
         $events->attach(MvcEvent::EVENT_RENDER, array($this, 'onRender'), 100);
     }
@@ -76,17 +76,17 @@ class Module
      *
      * Attaches a rendering/response strategy to the View.
      *
-     * @param \Zend\Mvc\MvcEvent $e
+     * @param \Zend\Mvc\MvcEvent $event
      */
-    public function onRender(MvcEvent $e)
+    public function onRender(MvcEvent $event)
     {
-        $result = $e->getResult();
+        $result = $event->getResult();
 
         if (!$result instanceof View\XmlModel) {
             return;
         }
 
-        $app = $e->getTarget();
+        $app = $event->getTarget();
         $services = $app->getServiceManager();
         if ($services->has('View')) {
             $view = $services->get('View');

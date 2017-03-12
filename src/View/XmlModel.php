@@ -39,7 +39,7 @@ class XmlModel extends BaseViewModel
     {
         $payload = $this->getPayload();
 
-        return $payload instanceof Collection;
+        return ($payload instanceof Collection);
     }
 
     /**

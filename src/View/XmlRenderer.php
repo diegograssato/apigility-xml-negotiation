@@ -7,7 +7,9 @@ use Zend\View\Renderer\RendererInterface;
 use Zend\View\Resolver\ResolverInterface;
 use Zend\View\Exception;
 use Zend\View\HelperPluginManager;
+use Zend\View\ViewEvent;
 use ZF\ApiProblem\ApiProblem;
+use ZF\ApiProblem\View\ApiProblemModel;
 use ZF\ApiProblem\View\ApiProblemRenderer;
 
 /**
@@ -163,5 +165,27 @@ class XmlRenderer implements RendererInterface
         }
 
         return $nameOrModel->serialize();
+    }
+
+    /**
+     * Render an API-Problem result
+     *
+     * Creates an ApiProblemModel with the provided ApiProblem, and passes it
+     * on to the composed ApiProblemRenderer to render.
+     *
+     * If a ViewEvent is composed, it passes the ApiProblemModel to it so that
+     * the ApiProblemStrategy can be invoked when populating the response.
+     *
+     * @param  ApiProblem $problem
+     * @return string
+     */
+    protected function renderApiProblem(ApiProblem $problem)
+    {
+        $model = new ApiProblemModel($problem);
+        $event = $this->getViewEvent();
+        if ($event) {
+            $event->setModel($model);
+        }
+        return $this->apiProblemRenderer->render($model);
     }
 }
